@@ -6,18 +6,27 @@
     <body>
         <%- include('./navigation.ejs') %>
             <h1>Lista de personas</h1>
-            <div class="contenedor">
+            <div class="container">
                 <% personas.forEach(element => { %>
-                        <ul>
-                        <li><%= element.nombre %>
+                    <div class="row">
+                        <div class="col-md-4 mt-4">
+                            <%= element.nombre %>
+                        </div>
+                        <div class="col-md-4 mt-4">
                             <%= element.email %>
-                            <a class="editar" href="/edit/<%= element.id %>" role="button">Editar</a>
-
-                            <a class="borrar" href="/delete/<%= element.id %>" role="button">Borrar</a>
-                        </li>
-                        </ul>
-                <% }) %>
+                        </div>
+                        <div class="col-md-4 mt-4">
+                            <a class="btn btn-primary" href="/edit/<%= element.id %>" role="button">Editar</a>
+                            <a class="btn btn-primary" href="/delete/<%= element.id %>" role="button">Borrar</a>
+                        </div>
+                    </div>
+                    <% }) %>
 
             </div>
+
+
+            <ul>
+
+            </ul>
     </body>
 </html>
