@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('./head.ejs') %>
+
+    <body>
+        <%= title %>
+        <form action="/agregarPersona" method="post">
+            <input type="text" name="nombre" placeholder="Nombre">
+            <input type="text" name="email" placeholder="E mail">
+            <input type="number" name="id_oficina" placeholder="ID Denominacion">
+            <button type="submit">Agregar</button>
+        </form>
+    </body>
+
+</html>

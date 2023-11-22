@@ -8,10 +8,13 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-
+// Conexion a database - W
+var db = require('./db');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+// Conexion a database - W
+app.set("db", db);
 
 app.use(logger('dev'));
 app.use(express.json());

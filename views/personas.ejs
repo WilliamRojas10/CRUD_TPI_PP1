@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('./head.ejs') %>
+
+    <body>
+        <%- include('./navigation.ejs') %>
+            <h1>Lista de personas</h1>
+            <div class="contenedor">
+                <% personas.forEach(element => { %>
+                        <ul>
+                        <li><%= element.nombre %>
+                            <%= element.email %>
+                            <a class="editar" href="/edit/<%= element.id %>" role="button">Editar</a>
+
+                            <a class="borrar" href="/delete/<%= element.id %>" role="button">Borrar</a>
+                        </li>
+                        </ul>
+                <% }) %>
+
+            </div>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('./head.ejs') %>
+
+    <body style="display: flex; justify-content: center;align-items: center; flex-direction: column;">
+        <h1>
+            <%= title %>
+        </h1>
+        <form action="/resultados" method="post">
+            <input type="text" name="keyword" placeholder="Escribe un nombre">
+            <button type="submit">Buscar</button>
+        </form>
+    </body>

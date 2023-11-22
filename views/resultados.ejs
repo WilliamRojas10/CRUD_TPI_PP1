@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('./head.ejs') %>
+
+    <body style="display: flex; justify-content: center;align-items: center; flex-direction: column;">
+        <h1>
+            <%= title %>
+        </h1>
+        <ul>
+            <% personas.forEach(element => { %>
+                <li>
+                    <%= element.nombre  %>
+                </li>
+                <% }) %>
+        </ul>
+    </body>
