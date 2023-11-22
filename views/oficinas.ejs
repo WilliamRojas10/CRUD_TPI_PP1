@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('./head.ejs') %>
+
+    <body>
+        <%- include('./navigation.ejs') %>
+            <h1>Lista de oficinas</h1>
+            <div class="contenedor">
+                <% oficinas.forEach(element => { %>
+                   
+                    <ul><li> 
+                            <%= element.id %>                   
+                            <%= element.denominacion%>                      <a class="editar" href="/editarOficina/<%= element.id %>" role="button">Editar</a>
+                            <a class="borrar" href="/deleteOficina/<%= element.id %>" role="button">Borrar</a>
+                        </li></ul>
+
+                    </div>
+                    <% }) %>
+
+            </div>
+
+
+            <ul>
+
+            </ul>
+    </body>
+</html>

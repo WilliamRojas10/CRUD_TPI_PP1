@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+
+<%- include('./head.ejs') %>
+
+    <body>
+        <h1>Agregar oficina</h1>
+        <form action="/agregarOficina" method="post">
+            <input type="number" name="id" placeholder="ID"><!-- En name va el mismo nombre del campo de la base de datos-->
+            <input type="text" name="denominacion" placeholder="Denominacion">
+            <button type="submit">Agregar</button>
+        </form>
+    </body>
+
+</html>

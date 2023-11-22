@@ -97,6 +97,98 @@ const buscarPersonaResultados = (req, res, next) => {
     });
 };
 
+//////////////////CONTRALANDO OFICINA////////////////////////
+const listaOficinas = (req, res, next) => {
+    const db = req.app.get("db");
+    const query = "SELECT * from oficina";
+    db.query(query, function(err, rows) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.render("oficinas", { oficinas: rows, title: "Lista" });
+    })
+};
+const agregarOficina = function(req, res, next) {
+    res.render('agregarOficina', { title: "Agregar" }); //para renderizar a la plantilla agregarOficina.ejs
+};
+const postAgregarOficina = function(req, res, next) {
+    const db = req.app.get("db");
+    const id = req.body.id;
+    const denominacion = req.body.denominacion;
+    const query = "INSERT INTO oficina (id, denominacion) VALUES (?, ?)";
+    db.query(query, [id,denominacion], function(err) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        res.redirect("/oficinas"); //Despues de agregar el registro anda a la ruta /oficinas
+    })
+};
+
+const getDeleteOficina = (req, res, next) => {
+    const db = req.app.get('db');
+    var id = req.params.id;
+    db.query("SELECT * FROM oficina WHERE id=?", id, function(err, rows) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        res.render('borrarOficina', { item: rows[0], title: "Borrar" });
+    });
+};
+
+const postDeleteOficina = function(req, res, next) {
+    const db = req.app.get('db');
+    var id = req.params.id;
+    db.query("DELETE FROM oficina WHERE id=?", id, function(err) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        res.redirect('/oficinas');
+    });
+};
+
+const getEditarOficina = function(req, res, next) {
+    var db = req.app.get('db');
+    var id = req.params.id;
+    db.query("SELECT * FROM oficina WHERE id=(?)", [id], function(err, rows) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        res.render('editarOficina', { item: rows[0], title: "Editar" });
+    });
+};
+
+const postUpdateOficina = function(req, res, next) {
+    var db = req.app.get('db');
+    var id = req.params.id;
+    var denominacion = req.body.denominacion;//Obtén la descripción del formulario
+    db.query("UPDATE oficina SET denominacion=? WHERE id=?", [denominacion, id], function(err) {//El array de values tiene que ser pasado en el orden que requiere la consulta sql, no es lo mismo [denominacion, id] que [id, denominacion]
+        if (err) {
+            console.error(err);
+            return;
+        }
+        res.redirect('/oficinas');
+    });
+};
+
+const buscarOficina = (req, res, next) => {
+    res.render('busquedaOficina', { title: "Buscar Oficina" });
+};
+
+const buscarOficinaResultados = (req, res, next) => {
+    const db = req.app.get("db");
+    const keyword = req.body.keyword;
+    const query = 'SELECT * FROM oficina WHERE denominacion LIKE ?';
+    db.query(query, [`%${keyword}%`], (err, rows) => {
+        if (err) throw err;
+        res.render('oficinaResultados', { oficinas: rows, title: "Resultados" })
+    });
+};
+
 module.exports = {
     listaPersonas,
     agregarPersona,
@@ -106,5 +198,14 @@ module.exports = {
     getDeletePersona,
     postDeletePersona,
     buscarPersona,
-    buscarPersonaResultados
+    buscarPersonaResultados,
+    listaOficinas,
+    agregarOficina,
+    postAgregarOficina,
+    getDeleteOficina,
+    postDeleteOficina,
+    getEditarOficina,
+    postUpdateOficina,
+    buscarOficina,
+    buscarOficinaResultados
 }
