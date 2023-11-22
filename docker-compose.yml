@@ -15,7 +15,7 @@ services:
 
   # Servicio de la aplicación Node.js
   node_app:
-    image: williamrojas/crudnodejs:1.0
+    image: williamrojas/crudnodejs:1.0 #Nombre de la imagen build
     container_name: mi_app_node
     ports:
       - "3000:3000"    
